@@ -10,7 +10,7 @@ import json
 import copy
 import requests
 
-import ia
+import ai
 
 url_prefix = 'https://www.deepomatic.com/checkers/'
 
@@ -140,7 +140,7 @@ def play_game(config, size, candidate_color):
         print("Deepomatic starts to play !")
     while True:
         print_board(board)
-        move = ia.play(board, candidate_color)
+        move = ai.play(board, candidate_color)
         try:
             board = new_move(game, move)
         except GameOver as e:

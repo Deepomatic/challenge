@@ -1,5 +1,5 @@
 import main
-import ia
+import ai
 
 def convert_board(size, board):
     board = board.replace('\n', '')
@@ -37,7 +37,7 @@ ____w___
 ________
 """)
     ground_truth = [[(3, 2), (4, 1)], [(3, 2), (4, 3)]]
-    moves = ia.allowed_moves(board, 'b')
+    moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_02_move_black_disc_border():
@@ -52,7 +52,7 @@ ____w___
 ________
 """)
     ground_truth = [[(3, 0), (4, 1)]]
-    moves = ia.allowed_moves(board, 'b')
+    moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_03_move_white_disc():
@@ -67,7 +67,7 @@ ____w___
 ________
 """)
     ground_truth = [[(6, 4), (5, 5)], [(6, 4), (5, 3)]]
-    moves = ia.allowed_moves(board, 'w')
+    moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_04_move_black_king():
@@ -82,7 +82,7 @@ ____w___
 ________
 """)
     ground_truth = [[(3, 2), (4, 1)], [(3, 2), (4, 3)], [(3, 2), (2, 1)], [(3, 2), (2, 3)]]
-    moves = ia.allowed_moves(board, 'b')
+    moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_05_move_black_king():
@@ -97,7 +97,7 @@ ____W___
 ________
 """)
     ground_truth = [[(6, 4), (5, 5)], [(6, 4), (5, 3)], [(6, 4), (7, 5)], [(6, 4), (7, 3)]]
-    moves = ia.allowed_moves(board, 'w')
+    moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_06_move_black_initial():
@@ -112,7 +112,7 @@ _w_w_w_w
 w_w_w_w_
 """)
     ground_truth = [[(2, 1), (3, 0)], [(2, 1), (3, 2)], [(2, 3), (3, 2)], [(2, 3), (3, 4)], [(2, 5), (3, 4)], [(2, 5), (3, 6)], [(2, 7), (3, 6)]]
-    moves = ia.allowed_moves(board, 'b')
+    moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_07_move_white_initial():
@@ -127,7 +127,7 @@ _w_w_w_w
 w_w_w_w_
 """)
     ground_truth = [[(5, 6), (4, 7)], [(5, 6), (4, 5)], [(5, 4), (4, 5)], [(5, 4), (4, 3)], [(5, 2), (4, 3)], [(5, 2), (4, 1)], [(5, 0), (4, 1)]]
-    moves = ia.allowed_moves(board, 'w')
+    moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_08_capture_black_simple():
@@ -142,7 +142,7 @@ ________
 ________
 """)
     ground_truth = [[(3, 2), (5, 4)]]
-    moves = ia.allowed_moves(board, 'b')
+    moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_09_capture_white_simple():
@@ -157,7 +157,7 @@ ___b_b__
 ____w___
 """)
     ground_truth = [[(7, 4), (5, 6)], [(7, 4), (5, 2)]]
-    moves = ia.allowed_moves(board, 'w')
+    moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_10_capture_black_multiple():
@@ -172,7 +172,7 @@ ________
 ________
 """)
     ground_truth = [[(0, 5), (2, 3), (4, 1), (6, 3)]]
-    moves = ia.allowed_moves(board, 'b')
+    moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_11_capture_white_king():
@@ -187,7 +187,7 @@ ________
 ________
 """)
     ground_truth = [[(0, 5), (2, 7)], [(0, 5), (2, 3), (4, 1), (6, 3)]]
-    moves = ia.allowed_moves(board, 'w')
+    moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_12_capture_white_king_in_middle():
@@ -202,7 +202,7 @@ ________
 ________
 """)
     ground_truth = [[(2, 3), (0, 5), (2, 7)]]
-    moves = ia.allowed_moves(board, 'w')
+    moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 def test_13_capture_combo():
@@ -217,7 +217,7 @@ _W_w____
 ____b___
 """)
     ground_truth = [[(1, 0), (3, 2), (5, 0), (7, 2), (5, 4), (3, 2)], [(1, 0), (3, 2), (5, 0), (7, 2), (5, 4), (3, 6)], [(1, 0), (3, 2), (5, 4), (7, 2), (5, 0), (3, 2)], [(1, 4), (3, 2), (5, 0), (7, 2), (5, 4), (3, 2)], [(1, 4), (3, 2), (5, 0), (7, 2), (5, 4), (3, 6)], [(1, 4), (3, 2), (5, 4), (7, 2), (5, 0), (3, 2)], [(1, 4), (3, 6), (5, 4), (7, 2), (5, 0), (3, 2), (5, 4)]]
-    moves = ia.allowed_moves(board, 'b')
+    moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
 if __name__ == "__main__":

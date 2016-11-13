@@ -48,7 +48,7 @@ $ source .venv/bin/activate
 
 ## Goal
 
-The candidate is invited to first fill the function ```allowed_moves``` in the file ```ia.py```.
+The candidate is invited to first fill the function ```allowed_moves``` in the file ```ai.py```.
 
 **Arguments**:
 
@@ -147,7 +147,7 @@ $ make test
 
 ## Going further
 
-Once the ```allowed_moves``` function is working you can run the following command to try your IA against the one of Deepomatic:
+Once the ```allowed_moves``` function is working you can run the following command to try your AI against the one of Deepomatic:
 
 ```
 $ make
@@ -155,7 +155,7 @@ $ make
 
 It will ask for your name and we will record your games.
 
-The default IA will randomly choose its moves and is very likely to loose against Deepomatic. You are strongly encouraged to modify the function ```play``` in ```ia.py``` to improve the level of your IA.
+The default AI will randomly choose its moves and is very likely to loose against Deepomatic. You are strongly encouraged to modify the function ```play``` in ```ai.py``` to improve the level of your AI.
 
 ## Submission
 
@@ -169,6 +169,6 @@ $ pip freeze > requirements.txt
 Send the archive to vincent@deepomatic.com. You will be judged on:
 - the quality of your code
 - the elegance of your solution
-- the strength of you IA
+- the strength of you AI
 
 Good luck ! :-)
