@@ -166,7 +166,7 @@ $ source .venv/bin/activate
 $ pip freeze > requirements.txt
 ```
 
-Send the archive to vincent@deepomatic.com. You will be judged on:
+Please do not fork the project on Github but rather send an archive to vincent@deepomatic.com. You will be judged on:
 - the quality of your code
 - the elegance of your solution
 - the strength of you AI
