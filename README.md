@@ -3,7 +3,7 @@
 **IMPORTANT**: Before starting this challenge, make sure we have a position by sending your
 resume and cover letter to founders@deepomatic.com.
 
-Please use [this link](https://github.com/Deepomatic/challenge/archive/v1.0.zip) to download the source code and do not fork the repository. Please also read all the instructions carefully. Feel free to send any question to vincent@deepomatic.com.
+Please use [this link](https://github.com/Deepomatic/challenge/archive/master.zip) to download the source code and do not fork the repository. Please also read all the instructions carefully. Feel free to send any question to vincent@deepomatic.com.
 
 Checkers is a popular 2 player board game where the opponent discs are captured by jumping over them. The objective of the game is to capture all the opponent's discs or leave him with no valid moves left to make.
 
