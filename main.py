@@ -107,7 +107,8 @@ def new_move(game, move):
     if 'move' in response:
         print_move("Deepomatic made this move:", response['move'])
     if response['over']:
-        print_board(response['board'])
+        if 'board' in response:
+            print_board(response['board'])
         raise GameOver(response['winner'])
 
     return response['board']
