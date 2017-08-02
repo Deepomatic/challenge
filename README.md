@@ -1,4 +1,4 @@
-# Developer / Data Scientist Challenge
+# Developer / Research Engineer Challenge
 
 **IMPORTANT**: Before starting this challenge, make sure we have a position by sending your
 resume and cover letter to founders@deepomatic.com.
