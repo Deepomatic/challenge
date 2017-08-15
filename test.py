@@ -190,7 +190,38 @@ ________
     moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
-def test_12_capture_white_king_in_middle():
+def test_12_english_rules_no_backward():
+    board = convert_board(8, """
+________
+________
+___b_b__
+__w_____
+________
+________
+________
+________
+""")
+    ground_truth = [[(3, 2), (1, 4)]]
+    moves = ai.allowed_moves(board, 'w')
+    return board, ground_truth, check_moves(moves, ground_truth)
+
+def test_13_english_rules_no_long_jump():
+    board = convert_board(8, """
+_____W__
+________
+___b____
+________
+________
+________
+________
+________
+""")
+    ground_truth = [[(0, 5), (1, 4)],
+                    [(0, 5), (1, 6)]]
+    moves = ai.allowed_moves(board, 'w')
+    return board, ground_truth, check_moves(moves, ground_truth)
+
+def test_14_capture_white_king_in_middle():
     board = convert_board(8, """
 ________
 ____b_b_
@@ -205,7 +236,7 @@ ________
     moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
-def test_13_capture_combo():
+def test_15_capture_combo():
     board = convert_board(8, """
 ________
 b___b___
@@ -235,6 +266,9 @@ ____B___
     ]
     moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
+
+
+###############################################################################
 
 if __name__ == "__main__":
     for f in dir():
