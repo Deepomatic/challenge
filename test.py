@@ -33,10 +33,11 @@ ________
 __b_____
 ________
 ________
-____w___
+_____w__
 ________
 """)
-    ground_truth = [[(3, 2), (4, 1)], [(3, 2), (4, 3)]]
+    ground_truth = [[(3, 2), (4, 1)],
+                    [(3, 2), (4, 3)]]
     moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
@@ -48,7 +49,7 @@ ________
 b_______
 ________
 ________
-____w___
+_____w__
 ________
 """)
     ground_truth = [[(3, 0), (4, 1)]]
@@ -63,10 +64,11 @@ ________
 __b_____
 ________
 ________
-____w___
+_____w__
 ________
 """)
-    ground_truth = [[(6, 4), (5, 5)], [(6, 4), (5, 3)]]
+    ground_truth = [[(6, 5), (5, 6)],
+                    [(6, 5), (5, 4)]]
     moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
@@ -78,10 +80,13 @@ ________
 __B_____
 ________
 ________
-____w___
+_____w__
 ________
 """)
-    ground_truth = [[(3, 2), (4, 1)], [(3, 2), (4, 3)], [(3, 2), (2, 1)], [(3, 2), (2, 3)]]
+    ground_truth = [[(3, 2), (4, 1)],
+                    [(3, 2), (4, 3)],
+                    [(3, 2), (2, 1)],
+                    [(3, 2), (2, 3)]]
     moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
@@ -93,10 +98,13 @@ ________
 __B_____
 ________
 ________
-____W___
+_____W__
 ________
 """)
-    ground_truth = [[(6, 4), (5, 5)], [(6, 4), (5, 3)], [(6, 4), (7, 5)], [(6, 4), (7, 3)]]
+    ground_truth = [[(6, 5), (5, 6)],
+                    [(6, 5), (5, 4)],
+                    [(6, 5), (7, 6)],
+                    [(6, 5), (7, 4)]]
     moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
@@ -111,7 +119,13 @@ w_w_w_w_
 _w_w_w_w
 w_w_w_w_
 """)
-    ground_truth = [[(2, 1), (3, 0)], [(2, 1), (3, 2)], [(2, 3), (3, 2)], [(2, 3), (3, 4)], [(2, 5), (3, 4)], [(2, 5), (3, 6)], [(2, 7), (3, 6)]]
+    ground_truth = [[(2, 1), (3, 0)],
+                    [(2, 1), (3, 2)],
+                    [(2, 3), (3, 2)],
+                    [(2, 3), (3, 4)],
+                    [(2, 5), (3, 4)],
+                    [(2, 5), (3, 6)],
+                    [(2, 7), (3, 6)]]
     moves = ai.allowed_moves(board, 'b')
     return board, ground_truth, check_moves(moves, ground_truth)
 
@@ -126,7 +140,13 @@ w_w_w_w_
 _w_w_w_w
 w_w_w_w_
 """)
-    ground_truth = [[(5, 6), (4, 7)], [(5, 6), (4, 5)], [(5, 4), (4, 5)], [(5, 4), (4, 3)], [(5, 2), (4, 3)], [(5, 2), (4, 1)], [(5, 0), (4, 1)]]
+    ground_truth = [[(5, 6), (4, 7)],
+                    [(5, 6), (4, 5)],
+                    [(5, 4), (4, 5)],
+                    [(5, 4), (4, 3)],
+                    [(5, 2), (4, 3)],
+                    [(5, 2), (4, 1)],
+                    [(5, 0), (4, 1)]]
     moves = ai.allowed_moves(board, 'w')
     return board, ground_truth, check_moves(moves, ground_truth)
 
@@ -134,7 +154,7 @@ def test_08_capture_black_simple():
     board = convert_board(8, """
 ________
 ________
-______b_
+________
 __b_____
 ___w____
 ________
@@ -271,10 +291,17 @@ ____B___
 ###############################################################################
 
 if __name__ == "__main__":
-    for f in dir():
-        if f.startswith("test_"):
-            print("Running '%s':" % f)
-            (board, ground_truth, ok) = eval("%s()" % f)
+    def check_valid_position(test_name, board):
+        for row, line in enumerate(board):
+            for col, square in enumerate(line):
+                if (row + col) % 2 == 0:
+                    if square != '_':
+                        raise Exception("Ground truth for %s at row %d and column %d (starting at 0) is not valid, it should be '_' as it is a white square." % (test_name, row, col))
+    for test_name in dir():
+        if test_name.startswith("test_"):
+            print("Running '%s':" % test_name)
+            (board, ground_truth, ok) = eval("%s()" % test_name)
+            check_valid_position(test_name, board)
             if not ok:
                 main.print_board(board)
                 break
