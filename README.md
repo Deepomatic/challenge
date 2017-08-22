@@ -25,7 +25,7 @@ Each player occupies one of the 2 sides of the chess board where the discs are p
 - A disc making a **Capturing** move leaps over one of the opponent's discs that is 1 square away from itself and lands in a straight diagonal line, which is 2 squares away from itself. A jump can make only 1 capture, but the same disc can capture multiple opponent discs by doing multiple jumps in a single move. **A disc can only make forward capturing moves** (english rules).
 - A captured disc is removed from the board.
 - If a **Capturing** move exists, the jump has to be made. If more than one capture exists, a choice can be made among **Capturing** moves.
-- A disc reaching the opponent's side of the board is crowned as a King. King's move is similar to that of a regular disc's move but the restriction of forward only moves is lifted. Multiple King's may exist. When a disc reaches the opponent's side while capturing, **it is promoted King during the move and can continue to capture backwards during the same move. In some cases, a King can even go through the intial position it had when starting a capturing move**.
+- A disc reaching the opponent's side of the board is crowned as a King. King's move is similar to that of a regular disc's move but the restriction of forward only moves is lifted. Multiple King's may exist. When a disc reaches the opponent's side while capturing, **it is promoted King during the move and can continue to capture backwards during the same move. In some cases, a King can even go through the initial position it had when starting a capturing move**.
 
 ## Requirements
 
