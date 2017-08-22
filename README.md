@@ -14,6 +14,7 @@ The game takes place on an 8 * 8 chess board as shown below.
 Each player occupies one of the 2 sides of the chess board where the discs are placed. Black goes first.
 
 ## Rules
+**WARNING**: please read carefully even if you think that you know the rules. Those are *english* rules. Those are simpler: in a nutshell, a disc can only go forward even when capturing and a King can move in any direction but capture only nearby opponent discs (or move on nearby squares).
 
 - Each player begins with 12 colored discs as depicted in the previous image.
 - The discs are positioned such that each player has a light square on the right side corner closest to him or her.
