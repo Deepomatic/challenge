@@ -30,6 +30,10 @@ Each player occupies one of the 2 sides of the chess board where the discs are p
 
 ## Requirements
 
+You can either program in Python or C++
+
+### Python
+
 You will need Python 2.7+ for this project and a working **make**.
 
 You are free to add any library you might consider useful, but in that case, please use ```virtualenv``` to isolate those libraries from the ones of your system:
@@ -45,6 +49,10 @@ You will need to run the following command each time you start a new shell sessi
 ```
 $ source .venv/bin/activate
 ```
+
+### C++
+
+If you prefer C++, change config.py `use_cpp_implementation = True`. You will need to install `libboost_python`.
 
 ## Goal
 

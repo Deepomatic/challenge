@@ -1,6 +1,7 @@
 .DS_Store
-/config.json
-/.venv
+.venv
 
 *.pyc
 __pycache__
+
+config.json

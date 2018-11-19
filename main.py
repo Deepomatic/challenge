@@ -8,9 +8,16 @@ import os
 import sys
 import json
 import copy
+import time
+import platform
 import requests
 
-import ai
+import config
+if config.use_cpp_implementation:
+    sys.path.append("cpp/build/")
+    import ai_cpp as ai
+else:
+    import ai
 
 url_prefix = 'https://www.deepomatic.com/checkers/'
 
@@ -24,13 +31,39 @@ class GameOver(Exception):
         super(GameOver, self).__init__()
         self.winner = winner
 
+
 ###############################################################################
 
-if sys.version_info >= (3,0):
+color_me_flag = ''
+color_deepo_flag = ''
+white_flag = ''
+
+def set_color_flag():
+    global color_me_flag, color_deepo_flag, white_flag
+
+    # sample_ansi = '\x1b[31mRED' + '\x1b[33mYELLOW' + '\x1b[32mGREEN' + '\x1b[35mPINK' + '\x1b[0m' + '\n'
+    handle = sys.stdout
+    if (hasattr(handle, "isatty") and handle.isatty()) or \
+        ('TERM' in os.environ and os.environ['TERM'] == 'ANSI'):
+        if platform.system() == 'Windows' and not ('TERM' in os.environ and os.environ['TERM'] == 'ANSI'):
+            handle.write("Windows console, no ANSI support.\n")
+        else:
+            handle.write("ANSI output enabled.\n")
+            color_me_flag = '\x1b[32m'  # GREEN
+            color_deepo_flag = '\x1b[31m'  # RED
+            white_flag = '\x1b[0m'
+    else:
+        handle.write("ANSI output disabled.\n")
+
+
+###############################################################################
+
+if sys.version_info >= (3, 0):
     def raw_input(msg):
         return input(msg)
 else:
     pass
+
 
 ###############################################################################
 
@@ -61,25 +94,35 @@ def send_request(url, method, data = {}):
         else:
             raise Exception('Unknown error')
 
+
 ###############################################################################
 
-def print_board(board):
+def print_board(board, move=None, color_flag=''):
+    first_move = tuple(move[0]) if move is not None else None
+    last_move = tuple(move[-1]) if move is not None else None
+
     b = "_" * (2 * len(board) + 3) + "\n"
     for i, row in enumerate(board):
         b += "| "
         for j, c in enumerate(row):
+            if (i, j) == first_move or (i, j) == last_move:
+                b += color_flag
             if (i + j) % 2 == 0:
                 b += "  "
             else:
                 b += c + " "
+            if (i, j) == first_move or (i, j) == last_move:
+                b += white_flag
         b += "|\n"
     b += "-" * (2 * len(board) + 3)
     print(b + "\n")
+
 
 ###############################################################################
 
 def print_move(msg, move):
     print(msg + " " + ", ".join([str(tuple(m)) for m in move]))
+
 
 ###############################################################################
 
@@ -89,9 +132,12 @@ def new_game(config, size, color):
     data['color'] = color
     return send_request(url_prefix + 'games', 'post', data)
 
+
 ###############################################################################
 
-def new_move(game, move):
+def new_move(game, move, candidate_color):
+    deepomatic_color = 'w' if candidate_color == 'b' else 'b'
+
     # Check the move
     assert(len(move) > 0)
     mm = []
@@ -99,19 +145,20 @@ def new_move(game, move):
         assert(len(m) == 2)
         mm.append(list(m))
 
-    print_move("Your move:", mm)
+    print_move("Your move (color '{}'):".format(candidate_color), mm)
     response = send_request(url_prefix + 'games/%d' % game['id'], 'post', {'move': mm})
 
     if 'board_after_candidate_move' in response:
-        print_board(response['board_after_candidate_move'])
+        print_board(response['board_after_candidate_move'], mm, color_me_flag)
     if 'move' in response:
-        print_move("Deepomatic made this move:", response['move'])
+        print_move("Deepomatic (color '{}') made this move:".format(deepomatic_color), response['move'])
+    if 'board' in response:
+        print_board(response['board'], response['move'] if 'move' in response else None, color_deepo_flag)
     if response['over']:
-        if 'board' in response:
-            print_board(response['board'])
         raise GameOver(response['winner'])
 
     return response['board']
+
 
 ###############################################################################
 
@@ -130,6 +177,7 @@ def read_config():
             json.dump(config, f)
     return config
 
+
 ###############################################################################
 
 def play_game(config, size, candidate_color):
@@ -139,11 +187,11 @@ def play_game(config, size, candidate_color):
         print("You start to play !")
     else:
         print("Deepomatic starts to play !")
+    print_board(board)
     while True:
-        print_board(board)
         move = ai.play(board, candidate_color)
         try:
-            board = new_move(game, move)
+            board = new_move(game, move, candidate_color)
         except GameOver as e:
             if e.winner == candidate_color:
                 print('Game over: you win ! Congratulation !')
@@ -155,10 +203,12 @@ def play_game(config, size, candidate_color):
         except InvalidMoveException:
             return False
 
+
 ###############################################################################
 
 if __name__ == "__main__":
     config = read_config()
+    set_color_flag()
     if not play_game(config, 8, 'b'):
         print("You made an invalid move. Please check your code.")
     if not play_game(config, 8, 'w'):
