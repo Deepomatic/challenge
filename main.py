@@ -19,7 +19,7 @@ if config.use_cpp_implementation:
 else:
     import ai
 
-url_prefix = 'https://www.deepomatic.com/checkers/'
+url_prefix = 'https://checkers.deepomatic.com/checkers/'
 
 ###############################################################################
 
