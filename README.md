@@ -28,11 +28,18 @@ Each player occupies one of the 2 sides of the chess board where the discs are p
 - If a **Capturing** move exists, the jump has to be made. If more than one capture exists, a choice can be made among **Capturing** moves.
 - A disc reaching the opponent's side of the board is crowned as a King. King's move is similar to that of a regular disc's move but the restriction of forward only moves is lifted. Multiple King's may exist. When a disc reaches the opponent's side while capturing, **it is promoted King during the move and can continue to capture backwards during the same move. In some cases, a King can even go through the initial position it had when starting a capturing move**.
 
-## Requirements
+## Setup
 
-You can either program in Python or C++
+Clone this repository and enter into the root directory:
 
-### Python
+```
+$ git clone https://github.com/Deepomatic/challenge.git
+$ cd challenge
+```
+
+You can either choose to program in Python or in C++.
+
+### If you choose Python
 
 You will need Python 2.7+ for this project and a working **make**.
 
@@ -50,13 +57,24 @@ You will need to run the following command each time you start a new shell sessi
 $ source .venv/bin/activate
 ```
 
-### C++
+### If you choose C++
 
-If you prefer C++, change config.py `use_cpp_implementation = True`. You will need to install `libboost_python`.
+If you prefer C++, change config.py `use_cpp_implementation = True`. You will need to install the following:
+
+```
+$ apt update
+$ apt install make cmake g++ libboost-python-dev python3-dev
+```
+
+You should then be able to compile with:
+
+```
+$ make
+```
 
 ## Goal
 
-The candidate is invited to first fill the function ```allowed_moves``` in the file ```ai.py```.
+The candidate is invited to first fill the function ```allowed_moves``` in the file ```ai.py``` for Python or ```cpp/src/ai.cpp``` for C++.
 
 **Arguments**:
 
