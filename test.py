@@ -1,5 +1,6 @@
 import main
-import ai
+
+from config import ai
 
 def convert_board(size, board):
     board = board.replace('\n', '')

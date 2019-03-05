@@ -12,12 +12,7 @@ import time
 import platform
 import requests
 
-import config
-if config.use_cpp_implementation:
-    sys.path.append("cpp/build/")
-    import ai_cpp as ai
-else:
-    import ai
+from config import ai
 
 url_prefix = 'https://checkers.deepomatic.com/checkers/'
 
