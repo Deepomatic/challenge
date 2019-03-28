@@ -1,11 +1,16 @@
 import main
-
-from config import ai
+import ai
 
 def convert_board(size, board):
     board = board.replace('\n', '')
     board = board.replace(' ', '')
-    return [board[i:i + size] for i in range(0, len(board), size)]
+    board = [board[i:i + size] for i in range(0, len(board), size)]
+    # Check that the board is valid
+    for i, line in enumerate(board):
+        for j, c in enumerate(line):
+            if (i + j) % 2 == 0 and c != '_':
+                raise Exception("Invalid board: expected '_' at row {}, column {}".format(i, j))
+    return board
 
 def uniform_moves(moves):
     return [[list(m) for m in mm] for mm in moves]

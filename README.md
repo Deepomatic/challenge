@@ -100,9 +100,9 @@ The function ```allowed_moves``` must return a list of all the valid moves accor
     '_w_w____',
     '________',
     '_w______',
-    '_____b__',
-    '____w___',
-    '___w____'
+    '______b_',
+    '_____w__',
+    '____w___'
 ]
 >> allowed_moves(board, 'b')
 [
@@ -123,9 +123,9 @@ If black decides to play the first proposed move ```[(1, 2), (3, 0), (5, 2)]```,
     '___w____',
     '________',
     '________',
-    '__b__b__',
-    '____w___',
-    '___w____'
+    '__b___b_',
+    '_____w__',
+    '____w___'
 ]
 ```
 
