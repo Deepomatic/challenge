@@ -11,9 +11,11 @@ import copy
 import time
 import platform
 import requests
+import urllib3
 
 from config import ai
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 url_prefix = 'https://checkers.deepomatic.com/checkers/'
 
 ###############################################################################

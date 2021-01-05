@@ -173,7 +173,9 @@ $ make test
 
 ## Going further
 
-Once the ```allowed_moves``` function is working you can run the following command to try your AI against the one of Deepomatic:
+Please only start this section if `make test` successfully passes ALL the unit tests.
+
+You can run the following command to try your AI against the one of Deepomatic:
 
 ```
 $ make
