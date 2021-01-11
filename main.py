@@ -66,9 +66,9 @@ else:
 
 def send_request(url, method, data = {}):
     if method == 'get':
-        response = requests.get(url, params = data)
+        response = requests.get(url, params = data, verify=False)
     elif method == 'post':
-        response = requests.post(url, data = data)
+        response = requests.post(url, data = data, verify=False)
     else:
         raise Exception('Bad method')
 
